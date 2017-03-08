@@ -59,7 +59,7 @@ const configBase = function (options = {}) {
   ({offlinePlugin} = results);
 
   /**
-   * Hardwired dev config the rest are preconfiged in the .cruzerc.yml
+   * Hardwired dev config the rest are preconfiged in the .cruzinrc.yml
    */
   const base = _.defaultsDeep(_.omit(baseConfig, 'plugins'), {
     module: {
