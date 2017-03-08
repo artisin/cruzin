@@ -26,13 +26,7 @@ module.exports = {
   // scopeOverrides: {Object where key contains a Array of String}:
   // Use this when you want to override scopes for a specific commit type.
   // Example bellow specify scopes when type is fix:
-  scopeOverrides: {
-    fix: [
-      {name: 'merge'},
-      {name: 'style'},
-      {name: 'unitTest'}
-    ]
-  },
+  scopeOverrides: {},
   // allowCustomScopes: {boolean, default false}: adds the option custom to
   // scope selection so you can still typea scope if you need.
   allowCustomScopes: true,
