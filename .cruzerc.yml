@@ -1,0 +1,168 @@
+################################################################################
+# Tasks
+################################################################################
+tasks:
+  clean:
+    # Paths/files to clean uses del, paths follow glob syntax
+    # https://www.npmjs.com/package/del
+    paths:
+      - build/**/*
+      - www/**/*
+
+################################################################################
+# Webpack Config/options
+################################################################################
+webpack:
+  ##############################################################################
+  # base confuration -> applied to both development and production
+  base:
+    # The base directory, an absolute path, for resolving
+    # entry points and loaders from configuration
+    # https://webpack.js.org/configuration/entry-context/#context
+    context: src
+    # Entry for js assets
+    # https://webpack.js.org/configuration/entry-context/#entry
+    entry:
+      app: ./js/index.js
+    # https://webpack.js.org/configuration/resolve
+    resolve:
+      modules: [node_modules]
+      # https://webpack.js.org/configuration/resolve/#resolve-extensions
+      extensions: [.js, .json, .html, .css, .styl, .pug]
+    # https://webpack.js.org/configuration/target/#target
+    target: web
+    # base plugins
+    plugins:
+      # File name to extract stylus styles to if you wish
+      # to have multiple css files you will have to do this manually
+      ExtractTextPlugin:
+        # filename: '[name]-[hash].css'
+        # function is env dependant of you could use a string
+        filename: !!js/function >
+          function (env) {
+            return env !== 'production' ? '[name].css' : '[name]-[hash].css';
+          }
+      # Global assets
+      # https://webpack.js.org/plugins/provide-plugin/
+      ProvidePlugin:
+        $: jquery
+        jQuery: jquery
+      # Transfer dir's/file
+      # https://github.com/molforp/transfer-webpack-plugin
+      TransferWebpackPlugin: !!seq
+        - {from: root}
+      # Favicon
+      # https://github.com/jantimon/favicons-webpack-plugin
+      FaviconsWebpackPlugin:
+        # Logo Location
+        logo: ./img/logo.png
+        # The prefix for all image files (might be a folder or a name)
+        prefix: 'icons-[hash]'
+        # Emit all stats of the generated icons
+        emitStats: true
+        # The name of the json containing all favicon information
+        statsFilename: 'iconstats-[hash].json'
+        # Generate a cache file with control hashes and
+        # don't rebuild the favicons until those hashes change
+        persistentCache: true
+        # Inject the html into the html-webpack-plugin
+        inject: true
+        # favicon background color (see https://github.com/haydenbleasel/favicons#usage)
+        background: '#fff'
+        # favicon app title (see https://github.com/haydenbleasel/favicons#usage)
+        title: Cruzin
+        # which icons should be generated (see https://github.com/haydenbleasel/favicons#usage)
+        icons:
+          android: false
+          appleIcon: false
+          appleStartup: false
+          coast: false
+          favicons: true
+          firefox: false
+          opengraph: false
+          twitter: false
+          yandex: false
+          windows: false
+      # webpack-bundle-analyzer
+      # https://github.com/th0r/webpack-bundle-analyzer
+      BundleAnalyzerPlugin:
+        analyzerMode: static
+        analyzerPort: 8888
+        reportFilename: report.html
+        openAnalyzer: false
+        generateStatsFile: true
+        statsFilename: stats.json
+        statsOptions: null
+        logLevel: silent
+
+  ##############################################################################
+  # Development confuration
+  development:
+    # output - location to create/serve assets from
+    # https://webpack.js.org/concepts/output
+    output:
+      path: ./build
+    # https://webpack.js.org/configuration/devtool/#devtool
+    devtool: cheap-module-eval-source-map
+    # development plugins
+    plugins:
+      # https://www.npmjs.com/package/browser-sync-webpack-plugin
+      # options -> browsersync.io/docs/options/
+      BrowserSyncPlugin:
+        host: localhost
+        port: 3000
+        # Stop the browser from automatically opening
+        # open: false
+
+  ##############################################################################
+  # Production confuration
+  production:
+    # Add serviceworker for offline support
+    entry:
+      sw: ./js/serviceworker/index.js
+    # output to build to
+    output:
+      path: ./www
+      filename: '[name].[hash].js'
+      chunkFilename: '[name].[chunkhash].chunk.js'
+    # https://webpack.js.org/configuration/devtool/#devtool
+    # single mapping per line
+    devtool: cheap-module-source-map
+    # production plugins
+    plugins:
+      # minifies/optimized js
+      # https://webpack.js.org/plugins/uglifyjs-webpack-plugin/
+      UglifyJsPlugin:
+        mangle:
+          screw_ie8: true
+          keep_fnames: true
+        compress:
+          screw_ie8: true
+        comments: false
+      # Gzips assets
+      # https://github.com/webpack-contrib/compression-webpack-plugin
+      CompressionPlugin:
+        asset: '[path].gz[query]'
+        algorithm: gzip
+        test: !!js/regexp /\.js$|\.html$/
+        threshold: 10240
+        minRatio: 0.8
+      # Serviceworker plugin
+      # https://github.com/NekR/offline-plugin
+      # options: https://github.com/NekR/offline-plugin/blob/master/docs/options.md
+      OfflinePlugin:
+        # custom option, will add the index.html in main and the other pages
+        # in additional
+        addHTML: true
+        # Mission critical
+        caches:
+          main: ['app*.js', 'app*.css']
+          additional: ['*.js', '*.css', ':rest:', ':externals:']
+        excludes: ['**/.*', '**/*.map']
+        updateStrategy: changed
+        relativePaths: true
+        # check chach first
+        responseStrategy: cache-first
+        # generate events for ServiceWorker
+        ServiceWorker:
+          events: true

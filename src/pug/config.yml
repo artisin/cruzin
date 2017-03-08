@@ -1,0 +1,100 @@
+################################################################################
+# html-webpack-plugin + pug configuation
+#
+################################################################################
+option:
+  # html-webpack-plugin options
+  # https://github.com/jantimon/html-webpack-plugin
+  html:
+    # we don't want webpack to inject our assests since we take
+    # care of that ourselves
+    inject: false
+    # Development specific options
+    development:
+      # no need to minify in dev
+      minify: false
+    # Production specific options
+    production:
+      # Be careful with adding/changing options, in my opinion, html minifing
+      # tends to do more harm than good
+      # https://www.npmjs.com/package/html-minifier
+      minify:
+        collapseInlineTagWhitespace: true
+        collapseWhitespace: true
+        conservativeCollapse: true
+        minifyCSS: true
+        minifyJS: true
+        removeComments: true
+        preserveLineBreaks: true
+  # pug-html-loader options
+  # https://github.com/willyelm/pug-html-loader
+  pug:
+    development:
+      # Add pretty-indentation whitespace to output (false by default)
+      pretty: true
+    production:
+      # want to keep this true html minifies for us
+      pretty: true
+
+################################################################################
+# Common Pug Variables
+# Object is accsessible in all pug files, merged with local data
+################################################################################
+common:
+  # Need to be an array
+  script:
+    # - https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js
+  # regex matach of key will add hits to injected webpack entry point scripts.
+  # You could do this through webpack but I rather this method due to the controll
+  # it offers.
+  # NOTE: it will build the regex for you ie, don't use /^app\./ since it will not work
+  resource-hints: !!seq
+    # main entry point
+    - {type: 'script', match: ^app\., hints: {async: true, rel: 'preload', as: 'scripts'}}
+    # service worker
+    - {type: 'script', match: ^sw\., hints: {defer: true, as: 'scripts'}}
+    # main css
+    - {type: 'link', match: ^app\., hints: {async: true}}
+  # Link
+  link: !!seq
+    # Can leave out rel if you wish defaults to stylesheet
+    - {href: 'https://fonts.googleapis.com/css?family=Open+Sans|Poppins', title: 'fonts'}
+  # Meta
+  meta: !!seq
+    - {name: 'viewport', content: 'width=device-width, initial-scale=1.0'}
+    - {name: 'subject', content: 'Webin on the Worldz Intranetz'}
+    # activates data attributes for intercoolerjs
+    - {name: 'intercoolerjs:use-data-prefix', content: 'true'}
+    # intercool use, HTTP Methods - http://intercoolerjs.org/attributes/ic-get-from.html
+    - {name: 'intercoolerjs:use-actual-http-method', content: 'true'}
+  # Pages for the navigation include
+  navigation:
+    - Home
+    - About
+
+
+################################################################################
+# Page specific configuation and variables
+# - variables set in the data Object
+################################################################################
+page:
+  # Index Config
+  index:
+    filename: index.html
+    template: ./pages/index.pug
+    # Home variables
+    data:
+      title: Home Page
+      meta: !!seq
+      - {name: 'My Kool Home Page', content: 'Home is where the hearts at.'}
+
+  # About Config
+  about:
+    # If no filename name is specified it defaults to the
+    # key, ie, [key].html -> so this filename is about.html
+    template: ./pages/about.pug
+    # About variables
+    data:
+      title: About Page
+      meta: !!seq
+      - {name: 'My Kool About Page', content: 'Be about it.'}

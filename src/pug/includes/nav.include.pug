@@ -1,0 +1,36 @@
+//- pulls in the common data from our config.yml
+-var mixin  = require('./../index.mixin.js');
+-var common = mixin.getData('common')
+-var navigation = common.navigation
+//- nav include
+//-------------
+if navigation
+
+  nav.nav-container
+    .nav-wrap
+      ul&attributes(mixin.dataAttr({
+        'push-url': 'true',
+        target: '.content-container',
+        'select-from-response': '.content-container',
+        'transition-duration': '0.75s'
+      }, 'ic'))
+        //- naigation var is specified in config.yml in commonData
+        each page in navigation
+          //- lowercase for days baby
+          -var p = page.toLowerCase()
+          li(class=`nav-item ${p}-wrap`)
+            //- configs the index link
+            - var href = p === 'home' ? '/' : `/${p}.html`
+            button&attributes({
+              type: 'button',
+              class: `btn btn-${p}`,
+              'data-ic-get-from': href
+            })
+              a&attributes({
+              class: `link link-${p}`,
+              //custom disable of normal a href even so that inntercool
+              //handles the request to ajax load -> in events/intercooler.js
+              'data-ic-disable': true,
+              href: href
+            }) #{page}
+

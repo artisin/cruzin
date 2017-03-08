@@ -1,0 +1,61 @@
+
+ctr('.content-container', {
+  position: absolute 15% 0
+  height: 70%
+  grid: {
+    algin: 'center'
+  }
+  'comp-.content-wrap': {
+    height: 100%
+    grid: {
+      center: true
+      container: true
+    }
+    components: {
+      common: {
+        grid: {
+          column: '1/1'
+          algin: 'center'
+        }
+      }
+      '.title-wrap': {
+        font-size: responsive 25px 40px
+        height: 20%
+        comp-h1: {
+          margin-top: 0
+          text-align: center
+        }
+      }
+      '.img-wrap': {
+        height: 80%
+        position: relative
+        comp-img: {
+          size: 70%
+          alignSelf: center
+        }
+      }
+    }
+  }
+})
+
+//------------------------------//
+// Intercool transition
+//------------------------------//
+ctr('.content-container', {
+  option: {
+    transitionDefault: {
+      duration: 0.60s
+    }
+  }
+  transition: {
+    opacity: 1
+  }
+  'comp-.ic-transitioning': {
+    option: {
+      appendKey: true
+    }
+    transition: {
+      opacity: 0
+    }
+  }
+})

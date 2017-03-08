@@ -1,0 +1,17 @@
+//- about
+//-------
+extends ./../templates/master.pug
+
+//- include head page specific assets
+block head
+  -var data = mixin.getData('page.about')
+  include ./../mixin/head.mixin.pug
+  +head('about')
+
+
+block content
+  .content-wrap
+    .title-wrap
+      h1 About
+    .img-wrap
+      img(src=require('./../../img/logo.svg'), alt='logo')

@@ -1,0 +1,20 @@
+mixin head(page)
+  //- Title for the page
+  -var title = data.title
+  if title
+    title #{title}
+  else
+    title NO TITLE DATA FOUND
+
+  //- local meta
+  -var meta = data.meta
+  if meta
+    for i in meta
+      meta&attributes(mixin.meta(i))
+
+  //- local links
+  -var meta = data.link
+  if link
+    for i in link
+      //- if there is we want to require the asset
+      link&attributes(mixin.link(i))

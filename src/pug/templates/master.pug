@@ -1,0 +1,44 @@
+//- pulls in the common data from our config.yml
+-var mixin  = require('./../index.mixin.js');
+-var common = mixin.getData('common')
+
+html
+  //- pulls in the head assets
+  include ./../includes/head.include.pug
+  //- page specific
+  block head
+
+  //- the body of the show
+  body.body-container&attributes(mixin.dataAttr({
+    'history-elt': 'true'
+  }, 'ic'))
+    //- nav
+    include ./../includes/nav.include.pug
+    //- body
+    .content-container
+      block content
+        h1 BLOCK CONTENT
+
+    //- footer
+    include ./../includes/footer.include.pug
+    //- master script
+    if common.script
+      for src in common.script
+        script&attributes(mixin.script({
+          src: src
+        }))
+    //- local blocl script
+    block script
+    //- local script
+    if script
+      for src in script
+        script&attributes(mixin.script({
+          src: src
+        }))
+
+
+    if htmlWebpackPlugin
+      each src in htmlWebpackPlugin.files.js
+        script&attributes(mixin.script({
+          src: src
+        }))

@@ -1,0 +1,82 @@
+ctr('nav', {
+  position: absolute inherit 0
+  height: 15%
+  grid: {
+    align: 'center'
+  }
+  'comp-.nav-wrap': {
+    grid: {
+      center: true
+    }
+    comp-ul: {
+      margin: 0
+      padding: 0
+      grid: {
+        container: true
+      }
+      comp-li: {
+        grid: {
+          column: '1/2'
+        }
+        comp-button: {
+          width: 25vw
+          max-width: 250px
+          height: 50px
+          border: 2px solid $color-logo
+          border-radius: 4px
+          cursor: pointer
+          position: relative
+          grid: {
+            align: 'center'
+          }
+          hover: {
+            on: {
+              background: alpha($color-logo, 30%)
+            }
+            non: {
+              background: alpha($color-logo, 10%)
+            }
+          }
+          comp-a: {
+            color: $color-text
+            font-size: responsive 15px
+            size: 100%
+          }
+        }
+      }
+    }
+  }
+})
+
+
+//------------------------------//
+// Nav Loader - Intercool transition
+//------------------------------//
+ctr('nav', {
+  before: {
+    content: false
+    position: absolute 0 0
+    height: 2px
+    background: alpha(#A8EA0C, 90%)
+    opacity: 0
+    transform: {
+      translateX: -125vw
+    }
+  }
+  'comp-.loading': {
+    option: {
+      appendKey: true
+    }
+    before: {
+      opacity: 1
+      trans: {
+        option: {
+          duration: 1s
+        }
+        transform: {
+          translateX: 125vw
+        }
+      }
+    }
+  }
+})

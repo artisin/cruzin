@@ -1,0 +1,18 @@
+//- index (home)
+//-------
+extends ./../templates/master.pug
+
+//- include head page specific assets
+block head
+  -var data = mixin.getData('page.index')
+  include ./../mixin/head.mixin.pug
+  +head('index')
+
+
+block content
+  .content-wrap
+    .title-wrap
+      h1 Home
+    .img-wrap
+      img(src=require('./../../img/logo.svg'), alt='logo')
+

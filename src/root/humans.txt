@@ -1,0 +1,12 @@
+
+# humanstxt.org/
+# The humans responsible & technology colophon
+
+# TEAM
+
+    <te> -- <creator> -- <teschultz.com>
+
+# TECHNOLOGY COLOPHON
+
+    CSS3, HTML5
+    ctr, Mkdocs, Ngix, Stylus, jQuery, lodash, codemirror, scriptjs, js-cookie, mustache, lunr, pjax, Normalize.css, require-dir, babel-core, babel-loader, babel-plugin-react-transform, babel-plugin-transform-object-assign, babel-plugin-transform-runtime, babel-polyfill, babel-preset-es2015, babel-preset-stage-0, assets-webpack-plugin, json-loader, mustache-loader, babel-runtime, es6-promise, eslint, file-loader, gulp, gulp-autoprefixer, gulp-notify, gulp-stylus, gulp-watch, gulp-imagemin, gulp-rev, gulp-rev-replace, gulp-html-replace, gulp-clean, gulp-util, gulp-clean-css, gulp-htmlmin, gulp-exit, gulp-dom, gulp-filter, run-sequence, expose-loader, imagemin, npm-run-all, webpack, css-loader, style-loader, glob-all, should, mocha, lodash.includes, lodash, offline-plugin, iron-node
