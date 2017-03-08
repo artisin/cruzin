@@ -1,24 +1,43 @@
 {
   "name": "cruzin",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A mordern MVC-less Webpack buildtool for cruzin",
   "license": "MIT",
   "author": "te schultz",
   "repository": "git://github.com/artisin/cruzin.git",
+  "bugs": {
+    "url": "https://github.com/artisin/cruzin/issues"
+  },
+  "keywords": [
+    "MVC-less",
+    "babel",
+    "buildtool",
+    "ctr",
+    "pug",
+    "stylus",
+    "te",
+    "webpack"
+  ],
   "scripts": {
     "build": "npm run prod",
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
     "clean": "node __internals__/scripts/clean.js",
+    "commit": "git cz",
+    "deploy": "gh-pages -d www",
     "dev": "npm run clean && cross-env NODE_ENV=development webpack --config __internals__/webpack/webpack.dev.js --color --hide-modules --progress --watch",
     "presetup": "npm i colur shelljs",
     "prod": "npm run clean && cross-env NODE_ENV=production webpack --config __internals__/webpack/webpack.prod.js --color --progress",
+    "release": "release-it",
+    "release:major": "release-it major",
+    "release:minor": "release-it minor",
+    "release:patch": "release-it patch",
     "setup": "node ./__internals__/scripts/setup.js",
     "start": "npm run prod",
-    "update:all": "ncu --upgradeAll && npm install",
     "test": "mocha __tests__/ --colors --bail --compilers js:babel-core/register",
+    "update:all": "ncu --upgradeAll && npm install",
     "update:check": "ncu",
     "update:dev": "ncu --upgradeAll -d && npm install",
-    "update:prod": "ncu --upgradeAll -p && npm install",
-    "deploy": "gh-pages -d www"
+    "update:prod": "ncu --upgradeAll -p && npm install"
   },
   "dependencies": {
     "defclass": "0.2.0",
@@ -32,15 +51,17 @@
     "autoprefixer": "6.7.6",
     "babel-core": "6.22.1",
     "babel-loader": "6.2.10",
-    "should": "11.2.0",
     "babel-preset-es2015": "6.22.0",
     "browser-sync": "2.18.7",
     "browser-sync-webpack-plugin": "1.1.4",
     "colur": "0.0.3",
+    "commitizen": "2.9.5",
     "compression-webpack-plugin": "0.3.2",
+    "conventional-changelog-cli": "1.2.0",
     "cross-env": "3.1.4",
     "css-loader": "0.26.1",
     "ctr": "0.3.2-o",
+    "cz-customizable": "4.0.0",
     "del": "2.2.2",
     "extract-loader": "0.1.0",
     "extract-text-webpack-plugin": "2.1.0",
@@ -62,7 +83,9 @@
     "pug": "2.0.0-beta11",
     "pug-loader": "2.3.0",
     "raw-loader": "0.5.1",
+    "release-it": "2.6.0",
     "shelljs": "0.7.6",
+    "should": "11.2.0",
     "style-loader": "0.13.1",
     "stylus": "0.54.5",
     "stylus-loader": "2.4.0",
@@ -71,5 +94,13 @@
     "webpack": "2.2.1",
     "webpack-assets-manifest": "0.6.2",
     "webpack-bundle-analyzer": "2.3.0"
+  },
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-customizable"
+    },
+    "cz-customizable": {
+      "config": "./.cz-config.js"
+    }
   }
 }
