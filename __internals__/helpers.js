@@ -24,7 +24,7 @@ const fileExists = function (filePath) {
  * @param  {str} filePath -> config path
  * @return {---}          -> obj | bln
  */
-const getConfig = function (get = false, filePath = '.cruzerc.yml') {
+const getConfig = function (get = false, filePath = '.cruzinrc.yml') {
   filePath = path.resolve(process.cwd(), filePath);
   //saftey check
   if (!fileExists(filePath)) {

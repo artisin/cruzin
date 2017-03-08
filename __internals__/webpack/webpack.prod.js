@@ -18,7 +18,7 @@ const configProd = function () {
   const prodDir = getConfig('webpack.production.output.path') || 'www';
   const prodPath = path.join(process.cwd(), prodDir);
 
-  //default in the .cruzerc.yml -> webpack.production Object config
+  //default in the .cruzinrc.yml -> webpack.production Object config
   const devConfig = _.defaultsDeep({
     output: {path: prodPath}
   }, _.omit(getConfig('webpack.production'), 'plugins') || {}, {
@@ -29,7 +29,7 @@ const configProd = function () {
   });
 
   /**
-   * Hardwire prod config the rest are preconfiged in the .cruzerc.yml
+   * Hardwire prod config the rest are preconfiged in the .cruzinrc.yml
    */
   const prod = _.defaultsDeep(devConfig, {
     // Add development plugins

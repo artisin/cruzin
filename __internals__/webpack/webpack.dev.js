@@ -17,7 +17,7 @@ const configDev = function () {
   //configures dev output path, since the path needs to be configed beforhand
   const devDir = getConfig('webpack.development.output.path') || 'build';
   const devPath = path.join(process.cwd(), devDir);
-  //default in the .cruzerc.yml -> webpack.development Object config
+  //default in the .cruzinrc.yml -> webpack.development Object config
   const devConfig = _.defaultsDeep({
     output: {path: devPath}
   }, _.omit(getConfig('webpack.development'), 'plugins') || {}, {
@@ -29,7 +29,7 @@ const configDev = function () {
   });
 
   /**
-   * Hardwired dev config the rest are preconfiged in the .cruzerc.yml
+   * Hardwired dev config the rest are preconfiged in the .cruzinrc.yml
    */
   const dev = _.defaultsDeep(devConfig, {
     // Add development plugins

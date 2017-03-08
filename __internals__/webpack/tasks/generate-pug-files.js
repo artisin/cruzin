@@ -125,7 +125,7 @@ const htmlWebpackTmpl = function ({context, pugContext, key, file, html, pug, op
  * @return {arr}         -> Array of inililized HtmlWebpack plugin's for pages
  */
 const generatePugFiles = function ({context, options}) {
-  //.cruzerc.yml config varibles
+  //.cruzinrc.yml config varibles
   const pluginConfig = getConfig('pug.config') || 'config.yml';
   const pugContext = getConfig('pug.dir') || 'pug';
   //get the config.yml data for pug

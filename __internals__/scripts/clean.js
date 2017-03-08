@@ -1,5 +1,5 @@
 /**
- * Cleans dir specifed in the .cruzerc.yml
+ * Cleans dir specifed in the .cruzinrc.yml
  * config prop = clean: [dirs | files]
  */
 const _           = require('lodash');
