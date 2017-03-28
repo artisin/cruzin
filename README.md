@@ -4,12 +4,13 @@ __Description__: A modern MVC-less Webpack build tool for cruz'in. In the future
 
 __Commands__
 
-+ Install: `npm install`
-+ Development: `npm run dev`
-+ Build/Production: `npm run build`
++ Install: `yarn install`
++ Development: `yarn run dev`
++ Build/Production: `yarn run build`
 
-__Notes__
+__Tech__
 
 + HTML - Pug
 + Javascript - Bable
 + CSS - Stylus + ctr
++ [intercooler.js](intercoolerjs.org) - for MVC-like actions
