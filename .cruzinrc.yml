@@ -166,3 +166,5 @@ webpack:
         # generate events for ServiceWorker
         ServiceWorker:
           events: true
+        # No AppCache, its been deprecated
+        AppCache: false
