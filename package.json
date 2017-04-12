@@ -4,10 +4,6 @@
   "description": "A mordern MVC-less Webpack buildtool for cruzin",
   "license": "MIT",
   "author": "te schultz",
-  "repository": "git://github.com/artisin/cruzin.git",
-  "bugs": {
-    "url": "https://github.com/artisin/cruzin/issues"
-  },
   "keywords": [
     "MVC-less",
     "babel",
@@ -18,22 +14,25 @@
     "te",
     "webpack"
   ],
+  "repository": "git://github.com/artisin/cruzin.git",
+  "bugs": {
+    "url": "https://github.com/artisin/cruzin/issues"
+  },
   "scripts": {
     "build": "npm run prod",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
     "clean": "node __internals__/scripts/clean.js",
     "commit": "git cz",
     "deploy": "gh-pages -d www",
-    "dev": "npm run clean && cross-env NODE_ENV=development webpack --config __internals__/webpack/webpack.dev.js --color --hide-modules --progress --watch",
+    "dev": "cross-env NODE_ENV=development run-s clean webpack:dev",
     "presetup": "npm i colur shelljs",
-    "prod": "npm run clean && cross-env NODE_ENV=production webpack --config __internals__/webpack/webpack.prod.js --color --progress",
+    "prod": "NODE_ENV=production run-s clean webpack:prod",
     "setup": "node ./__internals__/scripts/setup.js",
     "start": "npm run prod",
     "test": "mocha __tests__/ --colors --bail --compilers js:babel-core/register",
-    "update:all": "ncu --upgradeAll && npm install",
-    "update:check": "ncu",
-    "update:dev": "ncu --upgradeAll -d && npm install",
-    "update:prod": "ncu --upgradeAll -p && npm install"
+    "update:prod": "ncu --upgradeAll -p && npm install",
+    "webpack:dev": "webpack --config __internals__/webpack/webpack.dev.js --color --hide-modules --progress --watch",
+    "webpack:prod": "webpack --config __internals__/webpack/webpack.prod.js --color --progress"
   },
   "dependencies": {
     "jquery": "^3.2.1",
@@ -72,6 +71,7 @@
     "lodash": "~4.17.4",
     "mocha": "~3.2.0",
     "nconf": "~0.8.4",
+    "npm-run-all": "4.0.2",
     "offline-plugin": "~4.6.1",
     "postcss-loader": "^1.3.3",
     "pug": "~2.0.0-beta11",
