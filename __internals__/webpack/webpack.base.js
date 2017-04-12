@@ -83,7 +83,7 @@ const configBase = function (options = {}) {
          * otherwise they get picked up my HtmlWebpackPlugin and as
          * a result they will not work as expected
          */
-        test: /.(\.include|\.mixin)\.pug$/,
+        test: /.(\.include|\.mixin|\.component|\.icon)\.pug$/,
         loader: 'pug-loader'
       }, {
         /**
