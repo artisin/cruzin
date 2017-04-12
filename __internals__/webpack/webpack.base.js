@@ -134,11 +134,11 @@ const configBase = function (options = {}) {
             options: {
               importLoaders: 2,
               root: '.',
-              name: production ? '[name].[hash].css' : '[name].css'
+              name: production ? '[name].[hash].css' : '[name].css',
+              minimize: production
             }
           }, {
             loader: 'postcss-loader',
-            // @important the "last 99 versions" if for testing purposes
             options: { plugins: () => [autoprefixer({ browsers: ['last 4 versions'] })] }
           }, {
             /**
