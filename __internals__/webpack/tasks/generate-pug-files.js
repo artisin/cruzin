@@ -4,8 +4,8 @@ const _                 = require('lodash');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const JSON5             = require('json5');
 const colur             = require('colur');
-const config            = require('./../../config.js');
-const {getConfig}       = require('./../../helpers.js');
+const {getConfig, env}  = require('./../../helpers.js');
+const enviroment        = env.get();
 
 /**
  * Helper to check and merge env data into the root of an Object
@@ -13,11 +13,10 @@ const {getConfig}       = require('./../../helpers.js');
  * @return {obj}
  */
 const checkEnvSetting = function (val) {
-  const env = config.env;
-  const opposite = env === 'production' ? 'development' : 'production';
-  if (_.has(val, config.env)) {
+  const opposite = enviroment === 'production' ? 'development' : 'production';
+  if (_.has(val, enviroment)) {
     //merge into root and omit
-    val = _.merge(_.omit(val, config.env), _.get(val, config.env));
+    val = _.merge(_.omit(val, enviroment), _.get(val, enviroment));
   }
   //omit opposite env obj data if any
   return _.omit(val, opposite);
@@ -101,7 +100,7 @@ const htmlWebpackTmpl = function ({context, pugContext, key, file, html, pug, op
     writeManifest(fileName, options);
   }
   //update offlinePlugin need be
-  if (config.env === 'production' && _.get(options, 'offlinePlugin.addHTML')) {
+  if (enviroment === 'production' && _.get(options, 'offlinePlugin.addHTML')) {
     options = updateOfflinePlugin(fileName, options);
   }
   //build the html template

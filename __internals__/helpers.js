@@ -3,6 +3,7 @@ const fs    = require('fs');
 const path  = require('path');
 const colur = require('colur');
 const yaml  = require('js-yaml');
+const nconf = require('nconf');
 
 /**
  * Checks if that shit exists yo
@@ -16,6 +17,20 @@ const fileExists = function (filePath) {
     return false;
   }
 };
+
+
+/**
+ * Helper to get the current enviroment context
+ * @return {obj}
+ */
+const env = {
+  get: function () {
+    nconf.argv().env();
+    return nconf.get('NODE_ENV');
+  }
+};
+
+
 
 
 /**
@@ -42,5 +57,6 @@ const getConfig = function (get = false, filePath = '.cruzinrc.yml') {
 
 module.exports = {
   fileExists,
-  getConfig
+  getConfig,
+  env
 };
