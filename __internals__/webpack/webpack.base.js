@@ -12,15 +12,14 @@ const FaviconsPlugin    = require('favicons-webpack-plugin');
 const BundleAnyzPlugin  = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const genPugFiles       = require('./tasks/generate-pug-files.js');
 const OfflinePlugin     = require('offline-plugin');
-const config            = require('./../config.js');
 const CTR               = require('ctr').stylus;
-const {getConfig}       = require('./../helpers.js');
+const {getConfig, env}  = require('./../helpers.js');
+const enviroment        = env.get();
 const ctr               = new CTR();
 
 
 const configBase = function (options = {}) {
-  const env = config.env;
-  const production = env === 'production';
+  const production = enviroment === 'production';
   //config the base context
   const baseContextDir = getConfig('webpack.base.context') || 'src';
   const baseContext = path.join(process.cwd(), baseContextDir);
@@ -193,7 +192,7 @@ const configBase = function (options = {}) {
        */
       new webpack.DefinePlugin({
         'process.env': {
-          NODE_ENV: JSON.stringify(config.env)
+          NODE_ENV: JSON.stringify(enviroment)
         }
       }),
       /**
