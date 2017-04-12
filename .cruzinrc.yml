@@ -5,9 +5,12 @@ tasks:
   clean:
     # Paths/files to clean uses del, paths follow glob syntax
     # https://www.npmjs.com/package/del
-    paths:
-      - build/**/*
-      - www/**/*
+    dev:
+      paths:
+        - build/**/*
+    prod:
+      paths:
+        - www/**/*
 
 ################################################################################
 # Webpack Config/options

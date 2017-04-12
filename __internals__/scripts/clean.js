@@ -2,18 +2,20 @@
  * Cleans dir specifed in the .cruzinrc.yml
  * config prop = clean: [dirs | files]
  */
-const _           = require('lodash');
-const shell       = require('shelljs');
-const colur       = require('colur');
-const del         = require('del');
-const {getConfig} = require('./../helpers.js');
+const _                = require('lodash');
+const shell            = require('shelljs');
+const colur            = require('colur');
+const del              = require('del');
+const {getConfig, env} = require('./../helpers.js');
 
 
 /**
  * Check for clean from config, and cycle clean
  */
 const cleanConfig = function () {
-  let clean = getConfig('tasks.clean.paths');
+  const enviroment = env.get();
+  const dir = enviroment === 'development' ? 'dev' : 'prod';
+  let clean = getConfig(`tasks.clean.${dir}.paths`);
   if (clean) {
     clean = _.isArray(clean) ? clean : [clean];
     del(clean).then(function (paths) {
