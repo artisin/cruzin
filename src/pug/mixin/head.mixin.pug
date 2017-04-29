@@ -10,7 +10,7 @@ mixin head(page)
   -var meta = data.meta
   if meta
     for i in meta
-      meta&attributes(mixin.meta(i))
+      meta&attributes(i)
 
   //- local links
   -var meta = data.link
