@@ -13,7 +13,7 @@ mixin head(page)
       meta&attributes(i)
 
   //- local links
-  -var meta = data.link
+  -var link = data.link
   if link
     for i in link
       //- if there is we want to require the asset

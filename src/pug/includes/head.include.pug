@@ -4,19 +4,17 @@
 //- head include
 //--------------
 head
-  //- meta
-  meta(charset='utf-8')
-  meta(http-equiv='X-UA-Compatible', content='IE=edge')
-  //- common meta
+  //- common meta, from cruzin.yml
   if common.meta
     for i in common.meta
       meta&attributes(i)
 
-  //- common links
+  //- common links, from cruzin.yml
   if common.link
     for i in common.link
       link&attributes(mixin.link(i))
 
+  //- css injected through webpack require
   if htmlWebpackPlugin
     each i in htmlWebpackPlugin.files.css
       link&attributes(mixin.link({href: i}))
