@@ -59,10 +59,23 @@ common:
   link: !!seq
     # Can leave out rel if you wish defaults to stylesheet
     - {href: 'https://fonts.googleapis.com/css?family=Open+Sans|Poppins', title: 'fonts'}
-  # Meta
+  # Global common Meta that is injected into every page
+  # Here is a list of all possible meta tags: https://github.com/joshbuchea/HEAD#meta
   meta: !!seq
+    # set character encoding for the document
+    # The above 3 meta tags *must* come first in the head;
+    # any other head content must come *after* these tags
+    - {charset: 'utf-8'}
+    - {http-equiv: 'X-UA-Compatible', content: 'IE=edge'}
     - {name: 'viewport', content: 'width=device-width, initial-scale=1.0'}
+
+    # Subject and description should be the same, used to display a snippet
+    # of text describing the website. Keep under 150 chars
     - {name: 'subject', content: 'Webin on the Worldz Intranetz'}
+    - {name: 'description', content: 'Webin on the Worldz Intranetz'}
+    # Gives a general age rating based on sites content
+    - {name: 'rating', content: 'General'}
+
     # activates data attributes for intercoolerjs
     - {name: 'intercoolerjs:use-data-prefix', content: 'true'}
     # intercool use, HTTP Methods - http://intercoolerjs.org/attributes/ic-get-from.html
